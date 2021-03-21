@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Resource, Api
-from controller.wellcome import Wellcome
+from wellcome import Wellcome
+from objeto import Objeto
 
 
 def create_app():
@@ -9,6 +10,8 @@ def create_app():
     api = Api(app)
 
     api.add_resource(Wellcome, '/')
+    api.add_resource(Objeto, '/objeto/<name>')
+
 
     return app
 
