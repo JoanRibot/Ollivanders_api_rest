@@ -2,12 +2,13 @@ class Inventory(object):
     def __init__(self, items):
         self.items = items
         self.date = 123
-        
+
     def add():
         pass
 
     def update_inventory():
         pass
+
 
 class Item:
     def __init__(self, name, sell_in, quality):
@@ -18,7 +19,8 @@ class Item:
     def __repr__(self):
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
 
-class Updateable():
+
+class Updateable:
     def update_quality():
         pass
 
@@ -26,7 +28,7 @@ class Updateable():
 class NormalItem(Item):
     def __init__(self, name, sell_in, quality):
         Item.__init__(self, name, sell_in, quality)
-    
+
     def set_sell_in(self):
         self.sell_in -= 1
 
@@ -37,15 +39,15 @@ class NormalItem(Item):
             self.quality = self.quality + valor
         else:
             self.quality = 0
-    
+
     def update_quality(self):
         if self.sell_in > 0:
             self.setQuality(-1)
         else:
             self.setQuality(-2)
         self.set_sell_in()
-        
-    
+
+
 class AgedBrie(NormalItem):
     def __init__(self, name, sell_in, quality):
         Item.__init__(self, name, sell_in, quality)
@@ -56,10 +58,11 @@ class AgedBrie(NormalItem):
         else:
             self.setQuality(2)
         self.set_sell_in()
-         
+
 
 # menos días más calidad
-    
+
+
 class Sulfuras(NormalItem):
     def __init__(self, name, sell_in, quality):
         Item.__init__(self, name, sell_in, quality)
@@ -67,7 +70,8 @@ class Sulfuras(NormalItem):
     def update_quality(self):
         self.quality = 80
 
-class BackstagePasses(NormalItem): 
+
+class BackstagePasses(NormalItem):
     def __init__(self, name, sell_in, quality):
         Item.__init__(self, name, sell_in, quality)
 

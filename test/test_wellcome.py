@@ -4,6 +4,6 @@ import pytest
 
 @pytest.mark.wellcome
 def testWellcome(client):
-    rv = client.get('/')
+    rv = client.get("/")
     assert b'{"Wellcome": "to Ollivanders"}' in rv.data
-    assert {'Wellcome': 'to Ollivanders'} == rv.get_json()
+    assert {"Wellcome": "to Ollivanders"} == rv.get_json()
