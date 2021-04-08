@@ -1,6 +1,6 @@
 from flask_restful import fields, marshal_with, abort
 
-#from repository.db import DB
+from repository.db import *
 
 
 class Service:
