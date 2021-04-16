@@ -6,3 +6,7 @@ class Objeto(Resource):
     def get(self, name):
         # curl http://localhost:5000/objeto/"Aged%20Brie"
         return Service.get_objeto(name), 200
+
+    def post(self, item):
+        return Service.post_objeto(name, sell_in, quality)
+

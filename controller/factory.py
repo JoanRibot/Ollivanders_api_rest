@@ -1,7 +1,8 @@
 from flask import Flask
 from flask_restful import Resource, Api
-from wellcome import Wellcome
-from objeto import Objeto
+from controller.wellcome import Wellcome
+from controller.objeto import Objeto
+from repository.db import *
 
 
 def create_app():

@@ -6,9 +6,9 @@ from repository.db import *
 class Service:
 
     resource_fields = {
-        "name": fields.String,
-        "sell_in": fields.Integer,
-        "quality": fields.Integer,
+        "Name": fields.String,
+        "Sell_in": fields.Integer,
+        "Quality": fields.Integer,
     }
 
     @staticmethod
@@ -18,9 +18,42 @@ class Service:
         if not name:
             abort(404, message="Es necesario el nombre del item")
 
-        item = DB.get_objeto(name)
+        item = get_objeto(name)
 
         if not item:
             abort(404, message="El item {} no existe".format(name))
 
         return item
+
+    @staticmethod
+    @marshal_with(resource_fields)
+    def get_sell_in(sell_in):
+        if not sell_in:
+            abort(404, message="Es necesario el nombre del item")
+
+        item = get_sell_in(sell_in)
+
+        if not item:
+            abort(404, message="El item con sell_in {} no existe".format(sell_in))
+
+        return item
+
+    @staticmethod
+    @marshal_with(resource_fields)
+    def get_quality(quality):
+        if not quality:
+            abort(404, message="Es necesario el nombre del item")
+
+        item = get_quality(quality)
+
+        if not item:
+            abort(404, message="El item con quality {} no existe".format(quality))
+
+        return item
+
+
+    @staticmethod
+    @marshal_with(resource_fields)
+    def post_objeto(item):
+
+        item = post_objeto(item)
