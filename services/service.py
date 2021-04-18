@@ -1,14 +1,13 @@
 from flask_restful import fields, marshal_with, abort
-
 from repository.db import *
-
+from domain.types import *
 
 class Service:
 
     resource_fields = {
-        "Name": fields.String,
-        "Sell_in": fields.Integer,
-        "Quality": fields.Integer,
+        "name": fields.String,
+        "sell_in": fields.Integer,
+        "quality": fields.Integer,
     }
 
     @staticmethod
@@ -51,9 +50,27 @@ class Service:
 
         return item
 
-
+    
     @staticmethod
     @marshal_with(resource_fields)
-    def post_objeto(item):
+    def get_inventario():
 
-        item = post_objeto(item)
+        item = get_inventario()
+
+        if not item:
+            abort(404, message="No hay items en el inventario")
+
+        return item
+
+
+    @staticmethod
+    def post_objeto(args):
+        post_objeto(args["name"], args["sell_in"], args["quality"])
+        db = get_db()
+        # args = parser.parse_args()
+        # add_objeto = g.Item(args['name'], args['sell_in'], args['quality'])
+
+        db.session.add(post_objeto)
+        db.session.commit()
+
+        return "Item añadido :)"

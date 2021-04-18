@@ -30,18 +30,15 @@ class Inventory(db.Model):
     __tablename__ = 'inventory'
 
     id = db.Column(db.Integer, primary_key=True)
-    Name = db.Column(db.String(40), nullable=False)
-    Sell_in = db.Column(db.Integer, nullable=False)
-    Quality = db.Column(db.Integer, nullable=False)
+    name = db.Column(db.String(40), nullable=False)
+    sell_in = db.Column(db.Integer, nullable=False)
+    quality = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
-        return f'Item ({self.Name, self.Sell_in, self.Quality})'
+        return f'Item ({self.name, self.sell_in, self.quality})'
     
 def init_db():
     db = get_db()
-
-   # with app.open_resource('schema.mysql') as f:
-    #    db.executescript(f.read().decode('utf8'))
 
     items = [AgedBrie("Aged Brie", 2, 0),
             NormalItem("Elixir of the Mongoose", 5, 7),
@@ -56,7 +53,7 @@ def init_db():
     resultado = []
 
     for item in items:
-        objeto = Inventory(Name = item.name, Sell_in = item.sell_in, Quality = item.quality)
+        objeto = Inventory(name = item.name, sell_in = item.sell_in, quality = item.quality)
         resultado.append(objeto)
         
     db.drop_all()
@@ -77,19 +74,30 @@ def init_app(app):
 ################################################################################################
 
 def get_objeto(name):
-    query = db.session.query(Inventory).filter_by(Name = name).all()
+    query = db.session.query(Inventory).filter_by(name = name).all()
     return query
 
 def get_sell_in(sell_in):
-    query = db.session.query(Inventory).filter_by(Sell_in = sell_in).all()
+    query = db.session.query(Inventory).filter_by(sell_in = sell_in).all()
     return query
 
 def get_quality(quality):
-    query = db.session.query(Inventory).filter_by(Quality = quality).all()
+    query = db.session.query(Inventory).filter_by(quality = quality).all()
     return query
 
-def post_objeto(item):
-    objeto = Inventory(Name = item.name, Sell_in = item.sell_in, Quality = item.quality)
+def get_inventario():
+    query = db.session.query(Inventory).all()
+    return query
+
+def post_objeto(name, sell_in, quality):
+    objeto = Inventory(name = name, sell_in = sell_in, quality = quality)
 
     db.session.add(objeto)
     db.session.commit()
+
+
+# def post_objeto(item):
+#     objeto = Inventory(name = item.name, sell_in = item.sell_in, quality = item.quality)
+    
+#     db.session.add(objeto)
+#     db.session.commit()
