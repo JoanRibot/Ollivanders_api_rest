@@ -16,7 +16,7 @@ def get_db():
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         db.init_app(app)
         g.db = db
-        g.Items = Inventory
+        g.Items = Inventory ###REVISAR###
 
     return g.db
 
@@ -33,6 +33,11 @@ class Inventory(db.Model):
     name = db.Column(db.String(40), nullable=False)
     sell_in = db.Column(db.Integer, nullable=False)
     quality = db.Column(db.Integer, nullable=False)
+    
+    def __init__(self,  name, sell_in, quality):
+        self.name = name
+        self.sell_in = sell_in
+        self.quality = quality
 
     def __repr__(self):
         return f'Item ({self.name, self.sell_in, self.quality})'
@@ -89,15 +94,17 @@ def get_inventario():
     query = db.session.query(Inventory).all()
     return query
 
-def post_objeto(name, sell_in, quality):
-    objeto = Inventory(name = name, sell_in = sell_in, quality = quality)
+def post_objeto(args):
+    add_item = Inventory(name = args['name'], sell_in = args['sell_in'], quality = args['quality'])
 
-    db.session.add(objeto)
+    db.session.add(add_item) ###donde guarda los datos exactamente?###
     db.session.commit()
 
+    return "Objeto añadido con éxito :)"
 
-# def post_objeto(item):
-#     objeto = Inventory(name = item.name, sell_in = item.sell_in, quality = item.quality)
-    
-#     db.session.add(objeto)
-#     db.session.commit()
+def delete_objeto(args):
+    query = db.session.query(Inventory).filter_by(name = args['name'], sell_in = args['sell_in'], quality = args['quality']).first()
+
+    db.session.delete(query)
+    db.session.commit()
+    return "Objeto borrado con éxito :D"

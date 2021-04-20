@@ -22,10 +22,9 @@ def create_app():
     api.add_resource(Sell_in, "/objeto/sellin/<sell_in>")
     api.add_resource(Quality, "/objeto/quality/<quality>")
     
-
     return app
 
 
 if __name__ == "__main__":
     app = create_app()
-    app.run(debug=False)
+    app.run(debug = True)

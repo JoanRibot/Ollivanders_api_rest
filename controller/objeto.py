@@ -9,8 +9,6 @@ class Objeto(Resource):
         return Service.get_objeto(name), 200
 
     def parseRequest(self):
-        # Validar el objeto flask.Request.values
-        # o flask.Request.json
         parser = reqparse.RequestParser(bundle_errors=True)
         parser.add_argument('name', type=str, required=True,
                             help='name required')
@@ -18,11 +16,12 @@ class Objeto(Resource):
                             help='sellIn required')
         parser.add_argument('quality', type=int, required=True,
                             help='quality required')
-        # args = parser.parse_args()
-        # es un diccionario con los argumentos
-        # especificados como keys
         return parser.parse_args()
 
     def post(self):
         args = self.parseRequest()     
-        return Service.post_objeto(args) 
+        return Service.post_objeto(args), 201
+
+    def delete(self):
+        args = self.parseRequest()     
+        return Service.delete_objeto(args), 200

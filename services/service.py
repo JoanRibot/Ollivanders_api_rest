@@ -65,12 +65,10 @@ class Service:
 
     @staticmethod
     def post_objeto(args):
-        post_objeto(args["name"], args["sell_in"], args["quality"])
-        db = get_db()
-        # args = parser.parse_args()
-        # add_objeto = g.Item(args['name'], args['sell_in'], args['quality'])
+        item = post_objeto(args)
+        return item
 
-        db.session.add(post_objeto)
-        db.session.commit()
-
-        return "Item añadido :)"
+    @staticmethod
+    def delete_objeto(args):
+        item = delete_objeto(args)
+        return item
