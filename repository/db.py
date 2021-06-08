@@ -12,7 +12,7 @@ db = SQLAlchemy()
 
 def get_db():
     if 'db' not in g:
-        app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:120320@localhost/ollivanders"
+        app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:murrutuyus@localhost/ollivanders"
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         db.init_app(app)
         g.db = db
